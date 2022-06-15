@@ -126,19 +126,32 @@ jobs:
           add-snippets: true
           category: ${{matrix.scan-type}}
           upload: false
-          output: CodeQL-Sarif-${{ matrix.scan-type }}
+          output: sarif-results-${{matrix.scan-type}}
+
+      - name: Filter Sarif
+        uses: zbazztian/filter-sarif@master
+        with:
+          # filter out all test files unless they contain a sql-injection vulnerability
+          patterns: |
+            -**/*.md
+            -**/*.txt
+            -**/*.dox
+            -**/*test*.c
+          input: sarif-results-${{matrix.scan-type}}/cpp.sarif
+          output: sarif-results-${{matrix.scan-type}}/cpp.sarif
 
       - name: Rename Sarif
         run: |
-          sed -i 's/"name": "CodeQL"/"name": "${{matrix.scan-type}}-CodeQL"/g' CodeQL-Sarif-${{ matrix.scan-type }}/cpp.sarif
+          sed -i 's/"name": "CodeQL"/"name": "CodeQL-${{matrix.scan-type}}"/g' sarif-results-${{matrix.scan-type}}/cpp.sarif
 
       - name: Archive Sarif
         uses: actions/upload-artifact@v2
         with:
-          name: CodeQL-Sarif-${{ matrix.scan-type }}
-          path: CodeQL-Sarif-${{ matrix.scan-type }}
+          name: sarif-results-${{matrix.scan-type}}
+          path: sarif-results-${{matrix.scan-type}}
 
       - name: Upload SARIF
         uses: github/codeql-action/upload-sarif@v1
         with:
-          sarif_file: CodeQL-Sarif-${{ matrix.scan-type }}/cpp.sarif
+          sarif_file: sarif-results-${{matrix.scan-type}}/cpp.sarif
+
