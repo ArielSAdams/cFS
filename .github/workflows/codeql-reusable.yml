@@ -111,7 +111,7 @@ jobs:
         working-directory: ${{env.BUILD_DIRECTORY}}
 
       - name: Initialize CodeQL
-        uses: github/codeql-action/init@v1
+        uses: github/codeql-action/init@v2
         with:
           languages: c
           config-file: nasa/cFS/.github/codeql/codeql-${{matrix.scan-type}}.yml@main
