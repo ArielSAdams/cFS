@@ -119,7 +119,7 @@ jobs:
       - name: Build
         run: ${{ inputs.make }}
         working-directory: ${{env.BUILD_DIRECTORY}}
-
+        
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v2
         with:
@@ -130,11 +130,8 @@ jobs:
 
       - name: Rename Sarif
         run: |
-          cd CodeQL-Sarif-${{ matrix.scan-type }}
-          cat cpp.sarif
-          sed -i 's/"name": "CodeQL"/"name": "CodeQL-${{matrix.scan-type}}"/g' cpp.sarif
-          cat cpp.sarif
-
+          sed -i 's/"name": "CodeQL"/"name": "CodeQL-${{matrix.scan-type}}"/g' CodeQL-Sarif-${{ matrix.scan-type }}/cpp.sarif
+        
       - name: Archive Sarif
         uses: actions/upload-artifact@v2
         with:
