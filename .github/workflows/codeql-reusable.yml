@@ -130,7 +130,9 @@ jobs:
 
       - name: Rename Sarif
         run: |
+          cat CodeQL-Sarif-${{ matrix.scan-type }}/codeql.sarif
           sed -i 's/"name": "CodeQL"/"name": "CodeQL-${{matrix.scan-type}}"/g' CodeQL-Sarif-${{ matrix.scan-type }}/codeql.sarif
+          cat CodeQL-Sarif-${{ matrix.scan-type }}/codeql.sarif
 
       - name: Archive Sarif
         uses: actions/upload-artifact@v2
