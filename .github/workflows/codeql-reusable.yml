@@ -96,7 +96,6 @@ jobs:
           rm -r .git
           rm -r ${{ inputs.component-path }} 
           ln -s ${{github.workspace}} ${{ inputs.component-path }} 
-
       
       - name: Checkout ${{ github.repository }}
         uses: actions/checkout@v2
@@ -111,7 +110,7 @@ jobs:
         working-directory: ${{env.BUILD_DIRECTORY}}
 
       - name: Initialize CodeQL
-        uses: github/codeql-action/init@v2
+        uses: github/codeql-action/init@v1
         with:
           languages: c
           config-file: nasa/cFS/.github/codeql/codeql-${{matrix.scan-type}}.yml@main
@@ -119,39 +118,26 @@ jobs:
       - name: Build
         run: ${{ inputs.make }}
         working-directory: ${{env.BUILD_DIRECTORY}}
-
+        
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v2
         with:
           add-snippets: true
           category: ${{matrix.scan-type}}
           upload: false
-          output: sarif-results-${{matrix.scan-type}}
-
-      - name: Filter Sarif
-        uses: zbazztian/filter-sarif@master
-        with:
-          # filter out all test files unless they contain a sql-injection vulnerability
-          patterns: |
-            -**/*.md
-            -**/*.txt
-            -**/*.dox
-            -**/*test*.c
-          input: sarif-results-${{matrix.scan-type}}/cpp.sarif
-          output: sarif-results-${{matrix.scan-type}}/cpp.sarif
-
+          output: CodeQL-Sarif-${{ matrix.scan-type }}
+          
       - name: Rename Sarif
         run: |
-          sed -i 's/"name": "CodeQL"/"name": "CodeQL-${{matrix.scan-type}}"/g' sarif-results-${{matrix.scan-type}}/cpp.sarif
-
+          sed -i 's/"name" : "CodeQL"/"name" : "CodeQL-${{ matrix.scan-type }}"/g' CodeQL-Sarif-${{ matrix.scan-type }}/cpp.sarif
+          
       - name: Archive Sarif
         uses: actions/upload-artifact@v2
         with:
-          name: sarif-results-${{matrix.scan-type}}
-          path: sarif-results-${{matrix.scan-type}}
+          name: CodeQL-Sarif-${{ matrix.scan-type }}
+          path: CodeQL-Sarif-${{ matrix.scan-type }}
 
       - name: Upload SARIF
         uses: github/codeql-action/upload-sarif@v1
         with:
-          sarif_file: sarif-results-${{matrix.scan-type}}/cpp.sarif
-
+          sarif_file: CodeQL-Sarif-${{ matrix.scan-type }}/cpp.sarif
