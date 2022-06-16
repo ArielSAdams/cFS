@@ -15,7 +15,7 @@ on:
 
 jobs:
   codeql:
-    uses: ArielSAdams/cFS/.github/workflows/codeql-reusable.yml@Test
+    uses: ArielSAdams/cFS/.github/workflows/codeql-reusable.yml@Test2
     with: 
       component-path: cFS
       make: make -j8
