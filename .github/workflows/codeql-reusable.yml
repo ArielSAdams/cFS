@@ -131,8 +131,6 @@ jobs:
       - name: Rename Sarif
         run: |
           sed -i 's/"name" : "CodeQL"/"name" : "CodeQL-${{ matrix.scan-type }}"/g' CodeQL-Sarif-${{ matrix.scan-type }}/cpp.sarif
-          cd CodeQL-Sarif-${{ matrix.scan-type }}
-          cat cpp.sarif
           
       - name: Archive Sarif
         uses: actions/upload-artifact@v2
