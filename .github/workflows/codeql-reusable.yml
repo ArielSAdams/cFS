@@ -135,7 +135,7 @@ jobs:
           
       - name: Rename Sarif
         run: |
-          sed -i 's/"name" : "CodeQL"/"name" : "CodeQL-coding-standard"/g' cpp.sarif CodeQL-Sarif-${{ matrix.scan-type }}/cpp.sarif
+          sed -i 's/"name" : "CodeQL"/"name" : "CodeQL-coding-standard"/g' CodeQL-Sarif-${{ matrix.scan-type }}/cpp.sarif
           cd CodeQL-Sarif-${{ matrix.scan-type }}
           cat cpp.sarif
         
