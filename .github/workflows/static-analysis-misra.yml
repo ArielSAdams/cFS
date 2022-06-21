@@ -71,13 +71,29 @@ jobs:
         if: ${{matrix.cppcheck =='psp'}}
         run: |
           cd ${{matrix.cppcheck}}
-          cppcheck --addon=misra --force --inline-suppr --std=c99 --language=c --enable=warning,performance,portability,style --suppress=variableScope --inconclusive ./fsw 2> ../${{matrix.cppcheck}}_cppcheck_err.txt
+          cppcheck --addon=misra --force --inline-suppr --std=c99 --language=c --enable=warning,performance,portability,style --suppress=variableScope --inconclusive ./fsw 2> ../${{matrix.cppcheck}}_cppcheck_err.xml
+
+      - uses: airtower-luna/convert-to-sarif@v0.2.0
+        with:
+          tool: 'CppCheck'
+          input_file: '${{matrix.cppcheck}}_cppcheck_err.xml'
+          sarif_file: '${{matrix.cppcheck}}_cppcheck_err.sarif'
+          
+      - name: define CONTAINER_WORKSPACE
+        run: |
+          echo "CONTAINER_WORKSPACE=${PWD}" >> ${GITHUB_ENV}
+          
+      - name: upload SARIF results
+        uses: github/codeql-action/upload-sarif@v1
+        with:
+          sarif_file: '${{matrix.cppcheck}}_cppcheck_err.sarif'
+          checkout_path: ${{ env.CONTAINER_WORKSPACE }}
           
       - name: Archive Static Analysis Artifacts
         uses: actions/upload-artifact@v2
         with:
           name: ${{matrix.cppcheck}}-cppcheck-err
-          path: ./*cppcheck_err.txt
+          path: ./*cppcheck_err.xml
 
       - name: Check for errors
         run: |
