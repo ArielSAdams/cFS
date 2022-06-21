@@ -2,8 +2,7 @@ name: Static Analysis with MISRA
 
 # Run this workflow manually from the Actions tab
 on:
-  push:
-  pull_request:
+  push: 
 
 jobs:
   #Checks for duplicate actions. Skips push actions if there is a matching or duplicate pull-request action.
@@ -42,7 +41,7 @@ jobs:
         with:
           submodules: true
 
-      - name: get MISRA addon
+      - name: Get MISRA addon
         run: |
             sudo apt-get install git -y
             git clone https://github.com/danmar/cppcheck.git
@@ -74,23 +73,33 @@ jobs:
           cd ${{matrix.cppcheck}}
           cppcheck --addon=misra --force --inline-suppr --std=c99 --language=c --enable=warning,performance,portability,style --suppress=variableScope --inconclusive ./fsw --xml 2> ${{matrix.cppcheck}}_cppcheck_err.xml
 
-      - uses: airtower-luna/convert-to-sarif@v0.2.0
+      - name: Convert bundle cppcheck to sarif 
+        uses: airtower-luna/convert-to-sarif@v0.2.0
+        if: ${{matrix.cppcheck =='bundle'}}
+        with:
+          tool: 'CppCheck'
+          input_file: '${{matrix.cppcheck}}_cppcheck_err.xml'
+          sarif_file: '${{matrix.cppcheck}}_cppcheck_err.sarif'
+          
+      - name: Convert cfe, osal, psp cppcheck to sarif 
+        uses: airtower-luna/convert-to-sarif@v0.2.0
+        if: ${{matrix.cppcheck =='bundle'}}
         with:
           tool: 'CppCheck'
           input_file: '${{matrix.cppcheck}}/${{matrix.cppcheck}}_cppcheck_err.xml'
           sarif_file: '${{matrix.cppcheck}}_cppcheck_err.sarif'
           
-      - name: define CONTAINER_WORKSPACE
+      - name: Define workspace
         run: |
           echo "CONTAINER_WORKSPACE=${PWD}" >> ${GITHUB_ENV}
           
-      - name: upload SARIF results
-        uses: github/codeql-action/upload-sarif@v1
+      - name: Upload sarif results
+        uses: github/codeql-action/upload-sarif@v2
         with:
           sarif_file: '${{matrix.cppcheck}}_cppcheck_err.sarif'
           checkout_path: ${{ env.CONTAINER_WORKSPACE }}
           
-      - name: Archive Static Analysis Artifacts
+      - name: Archive static analysis artifacts
         uses: actions/upload-artifact@v2
         with:
           name: ${{matrix.cppcheck}}-cppcheck-err
