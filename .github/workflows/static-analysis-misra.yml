@@ -98,8 +98,8 @@ jobs:
 
       - name: Check for errors
         run: |
-          if [[ -s ${{matrix.cppcheck}}_cppcheck_err.txt ]];
+          if [[ -s ${{matrix.cppcheck}}_cppcheck_err.xml ]];
           then
-            cat ${{matrix.cppcheck}}_cppcheck_err.txt
+            cat ${{matrix.cppcheck}}_cppcheck_err.xml
             exit -1
           fi
