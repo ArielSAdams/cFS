@@ -83,7 +83,6 @@ jobs:
           
       - name: Convert cfe, osal, psp cppcheck to sarif 
         uses: airtower-luna/convert-to-sarif@v0.2.0
-        if: ${{matrix.cppcheck =='bundle'}}
         with:
           tool: 'CppCheck'
           input_file: '${{matrix.cppcheck}}/${{matrix.cppcheck}}_cppcheck_err.xml'
