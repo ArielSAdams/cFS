@@ -2,7 +2,8 @@ name: Static Analysis with MISRA
 
 # Run this workflow manually from the Actions tab
 on:
-  workflow_dispatch:
+  push:
+  pull_request:
 
 jobs:
   #Checks for duplicate actions. Skips push actions if there is a matching or duplicate pull-request action.
