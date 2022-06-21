@@ -76,7 +76,7 @@ jobs:
 
       - uses: airtower-luna/convert-to-sarif@v0.2.0
         with:
-          tool: 'CppCheck-${{matrix.cppcheck}}'
+          tool: 'CppCheck'
           input_file: '${{matrix.cppcheck}}/${{matrix.cppcheck}}_cppcheck_err.xml'
           sarif_file: '${{matrix.cppcheck}}_cppcheck_err.sarif'
           
