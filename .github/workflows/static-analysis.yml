@@ -44,7 +44,24 @@ jobs:
           submodules: true
 
       - name: Run general cppcheck
-        run: cppcheck --force --inline-suppr . 2> general_cppcheck_err.txt
+        run: |
+          - cppcheck --force --inline-suppr . 2> general_cppcheck_err.xml
+
+      - uses: airtower-luna/convert-to-sarif@v0.2.0
+        with:
+          tool: 'CppCheck'
+          input_file: 'general_cppcheck_err.xml'
+          sarif_file: 'general_cppcheck_err.sarif'
+          
+      - name: define CONTAINER_WORKSPACE
+        run: |
+          echo "CONTAINER_WORKSPACE=${PWD}" >> ${GITHUB_ENV}
+          
+      - name: upload SARIF results
+        uses: github/codeql-action/upload-sarif@v1
+        with:
+          sarif_file: 'general_cppcheck_err.sarif'
+          checkout_path: ${{ env.CONTAINER_WORKSPACE }}
           
       - name: Check for general errors
         run: |
