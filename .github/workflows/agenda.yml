@@ -43,4 +43,5 @@ jobs:
       - name: Archive static analysis artifacts
         uses: actions/upload-artifact@v2
         with:
-          name: agenda.csv
+          name: CCB Agenda
+          path: agenda.csv
