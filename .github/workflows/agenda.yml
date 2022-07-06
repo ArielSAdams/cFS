@@ -39,9 +39,6 @@ jobs:
 
       - name: Create CCB Agenda 
         run: epr -t ${{ secrets.GITHUB_TOKEN }} -l CCB:Ready -x pr ArielSAdams/cFS ArielSAdams/osal > agenda.csv
-
-      - name: Upload CCB Agenda 
-        run: python3 -m csv2wiki -c agenda.csv --csv=CSV
         
       - name: Archive static analysis artifacts
         uses: actions/upload-artifact@v2
