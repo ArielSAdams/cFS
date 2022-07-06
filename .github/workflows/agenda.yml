@@ -2,7 +2,7 @@ name: Generate CCB Agenda
 
 on:
   push:
-  pull-request:
+  pull_request:
 
 jobs:
   #Checks for duplicate actions. Skips push actions if there is a matching or duplicate pull-request action. 
