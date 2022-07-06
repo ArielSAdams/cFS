@@ -33,6 +33,7 @@ jobs:
       - name: Install ruby
         run: |
           sudo apt-get install ruby-full -y
+          sudo gem update --system --no-user-install
           gem install export-pull-requests
 
       - name: Checkout code
