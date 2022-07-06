@@ -33,8 +33,7 @@ jobs:
       - name: Install ruby
         run: |
           sudo apt-get install ruby-full -y
-          sudo gem update --system --no-user-install
-          gem install export-pull-requests
+          arch -x86_64 gem install export-pull-requests
 
       - name: Checkout code
         run: epr -l CCB:Ready -x pr ArielSAdams/cFS > agenda.csv
