@@ -34,10 +34,8 @@ jobs:
         with:
           ruby-version: 2.6
           
-      - run: gem install export-pull-requests
-      
-      - name: Export PRs
-        run: export-pull-requests
+      - name: Install export-pull-requests
+        run: gem install export-pull-requests
 
       - name: Checkout code
         run: epr -l CCB:Ready -x pr ArielSAdams/cFS > agenda.csv
