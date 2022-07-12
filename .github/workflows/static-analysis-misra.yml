@@ -52,7 +52,6 @@ jobs:
       - name: Run bundle cppcheck
         if: ${{matrix.cppcheck =='bundle'}}
         run: |
-          cd ${{matrix.cppcheck}}
           cppcheck --addon=misra --force --inline-suppr --quiet . --xml 2> ${{matrix.cppcheck}}_cppcheck_err.xml ${{matrix.cppcheck}}_cppcheck_err.txt
           
         # Run strict static analysis for embedded portions of cfe, osal, and psp
