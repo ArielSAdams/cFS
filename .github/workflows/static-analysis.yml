@@ -45,7 +45,7 @@ jobs:
           submodules: true
 
       - name: Run general cppcheck
-        run: cppcheck --force --inline-suppr . --xml 2 > {general_cppcheck_err.xml, general_cppcheck_err.txt}
+        run: cppcheck --force --inline-suppr . --xml 2 > general_cppcheck_err.xml general_cppcheck_err.txt
       
       - name: ls
         run: ls 
