@@ -84,9 +84,6 @@ jobs:
         with:
           name: cppcheck-errors
           path: ./*cppcheck_err.xml
-          
-      - name: General cppcheck txt file
-        run: cppcheck --force --inline-suppr . 2 > general_cppcheck_err.txt
   
       - name: Check for general errors
         run: |
