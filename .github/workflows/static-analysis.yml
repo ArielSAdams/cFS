@@ -46,6 +46,9 @@ jobs:
 
       - name: Run general cppcheck
         run: cppcheck --force --inline-suppr . --xml 2 > {general_cppcheck_err.xml, general_cppcheck_err.txt}
+      
+      - name: ls
+        run: ls 
 
       - name: Convert general cppcheck to sarif 
         uses: airtower-luna/convert-to-sarif@v0.2.0
