@@ -89,6 +89,14 @@ jobs:
           input_file: '${{matrix.cppcheck}}/${{matrix.cppcheck}}_cppcheck_err.xml'
           sarif_file: '${{matrix.cppcheck}}_cppcheck_err.sarif'
           
+      - name: ls
+        run: ls
+        
+      - name: ls 2
+        run: |
+          cd ${{matrix.cppcheck}}
+          ls 
+          
       - name: Define workspace
         run: |
           echo "CONTAINER_WORKSPACE=${PWD}" >> ${GITHUB_ENV}
