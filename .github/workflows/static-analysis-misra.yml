@@ -101,7 +101,7 @@ jobs:
           checkout_path: ${{ env.CONTAINER_WORKSPACE }}
           
       - name: Archive static analysis artifacts
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: ${{matrix.cppcheck}}-cppcheck-err
           path: ./*cppcheck_err.*
