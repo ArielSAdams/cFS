@@ -40,7 +40,7 @@ jobs:
           submodules: true
 
       - name: Run general cppcheck 
-        run: cppcheck --force --inline-suppr . --xml 2> | tee general_cppcheck_err.xml  general_cppcheck_err.txt
+        run: cppcheck --force --inline-suppr . --xml 2> >(tee general_cppcheck_err.xml  general_cppcheck_err.txt >&2)
 
       - name: Archive static analysis artifacts
         uses: actions/upload-artifact@v3
