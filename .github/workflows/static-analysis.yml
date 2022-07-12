@@ -79,6 +79,7 @@ jobs:
           sarif_file: 'strict_cppcheck_err.sarif'
           checkout_path: ${{ env.CONTAINER_WORKSPACE }}
   
+  
       - name: Check for general errors
         run: |
           if [[ -s general_cppcheck_err.txt ]];
