@@ -41,6 +41,12 @@ jobs:
 
       - name: Run general cppcheck 
         run: cppcheck --force --inline-suppr . --xml 2>&1 | tee general_cppcheck_err.xml  general_cppcheck_err.txt
+
+      - name: Archive static analysis artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: cppcheck-errors
+          path: ./*cppcheck_err.*
           
       - name: Convert general cppcheck
         uses: airtower-luna/convert-to-sarif@v0.2.0
@@ -78,12 +84,6 @@ jobs:
         with:
           sarif_file: 'strict_cppcheck_err.sarif'
           checkout_path: ${{ env.CONTAINER_WORKSPACE }}
-  
-      - name: Archive static analysis artifacts
-        uses: actions/upload-artifact@v3
-        with:
-          name: cppcheck-errors
-          path: ./*cppcheck_err.*
   
       - name: Check for general errors
         run: |
