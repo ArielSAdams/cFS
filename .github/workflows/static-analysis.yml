@@ -83,7 +83,9 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: cppcheck-errors
-          path: ./*cppcheck_err.xml
+          path: |
+            ./*cppcheck_err.xml
+            ./*cppcheck_err.txt
   
       - name: Check for general errors
         run: |
