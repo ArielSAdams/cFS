@@ -97,12 +97,20 @@ jobs:
         run: |
           echo "CONTAINER_WORKSPACE=${PWD}" >> ${GITHUB_ENV}
 
-      - name: Archive static analysis artifacts
+      - name: Archive bundle static analysis artifacts
         uses: actions/upload-artifact@v3
+        if: ${{matrix.cppcheck !='bundle'}}
         with:
           name: ${{matrix.cppcheck}}-cppcheck-err
           path: ./*cppcheck_err.*
 
+      - name: Archive osal, cfe, and psp static analysis artifacts
+        uses: actions/upload-artifact@v3
+        if: ${{matrix.cppcheck !='bundle'}}
+        with:
+          name: ${{matrix.cppcheck}}-cppcheck-err
+          path: ./${{matrix.cppcheck}}/*cppcheck_err.*
+          
       - name: Upload sarif results
         uses: github/codeql-action/upload-sarif@v2
         with:
