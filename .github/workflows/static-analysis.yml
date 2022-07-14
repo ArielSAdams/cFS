@@ -40,13 +40,9 @@ jobs:
           submodules: true
 
       - name: Run general cppcheck 
-        run: cppcheck --force --inline-suppr . --xml 2> >(tee general_cppcheck_err.xml  general_cppcheck_err.txt >&2)
-
-      - name: Archive static analysis artifacts
-        uses: actions/upload-artifact@v3
-        with:
-          name: cppcheck-errors
-          path: ./*cppcheck_err.*
+        run: |
+          cppcheck --force --inline-suppr . --xml 2> general_cppcheck_err.xml  
+          cppcheck --force --inline-suppr . 2> general_cppcheck_err.txt
           
       - name: Convert general cppcheck
         uses: airtower-luna/convert-to-sarif@v0.2.0
@@ -68,8 +64,10 @@ jobs:
         # Run strict static analysis for embedded portions of cfe, osal, and psp
       - name: Strict cppcheck
         if: ${{ inputs.strict-dir-list !='' }}
-        run: cppcheck --force --inline-suppr --std=c99 --language=c --enable=warning,performance,portability,style --suppress=variableScope --inconclusive ${{ inputs.strict-dir-list }} --xml 2>&1 | tee strict_cppcheck_err.xml strict_cppcheck_err.txt
-
+        run: |
+          cppcheck --force --inline-suppr --std=c99 --language=c --enable=warning,performance,portability,style --suppress=variableScope --inconclusive ${{ inputs.strict-dir-list }} --xml 2> strict_cppcheck_err.xml 
+          cppcheck --force --inline-suppr --std=c99 --language=c --enable=warning,performance,portability,style --suppress=variableScope --inconclusive ${{ inputs.strict-dir-list }} 2> strict_cppcheck_err.txt
+ 
       - name: Convert strict cppcheck
         uses: airtower-luna/convert-to-sarif@v0.2.0
         if: ${{ inputs.strict-dir-list !='' }}
@@ -77,7 +75,13 @@ jobs:
           tool: 'CppCheck'
           input_file: 'strict_cppcheck_err.xml'
           sarif_file: 'strict_cppcheck_err.sarif'
-          
+
+      - name: Archive static analysis artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: cppcheck-errors
+          path: ./*cppcheck_err.*
+
       - name: Upload strict SARIF results
         uses: github/codeql-action/upload-sarif@v2
         if: ${{ inputs.strict-dir-list !='' }}
