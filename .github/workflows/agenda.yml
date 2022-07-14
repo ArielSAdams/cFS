@@ -1,0 +1,47 @@
+name: Generate CCB Agenda
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  #Checks for duplicate actions. Skips push actions if there is a matching or duplicate pull-request action. 
+  check-for-duplicates:
+    runs-on: ubuntu-latest
+    # Map a step output to a job output
+    outputs:
+        should_skip: ${{ steps.skip_check.outputs.should_skip }}
+    steps:
+      - id: skip_check
+        uses: fkirc/skip-duplicate-actions@master
+        with:
+          concurrent_skipping: 'same_content'
+          skip_after_successful_duplicate: 'true'
+          do_not_skip: '["pull_request", "workflow_dispatch", "schedule"]'
+
+  generate-agenda:
+    #Continue if check-for-duplicates found no duplicates. Always runs for pull-requests.
+    needs: check-for-duplicates
+    if: ${{ needs.check-for-duplicates.outputs.should_skip != 'true' }}
+    name: Generate Agenda
+    runs-on: ubuntu-18.04
+
+    strategy:
+      fail-fast: false
+
+    steps:      
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 2.6
+          
+      - name: Install export-pull-requests
+        run: gem install export-pull-requests
+
+      - name: Create CCB Agenda 
+        run: epr -t ${{ secrets.GITHUB_TOKEN }} -l CCB:Ready -x pr ArielSAdams/cFS ArielSAdams/osal > agenda.csv
+        
+      - name: Archive static analysis artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: CCB Agenda
+          path: agenda.csv
