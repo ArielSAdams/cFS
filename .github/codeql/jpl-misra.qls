@@ -4,5 +4,5 @@
 # Restrict to only the queries with the following ID patterns.
 - include:
     id:
-      # MISRA Rule 9-5-1
-      - cpp/jsf/av-rule-153
+      # MISRA 6-2-2
+      - cpp/jsf/av-rule-202
