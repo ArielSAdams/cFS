@@ -4,5 +4,5 @@
 # Restrict to only the queries with the following ID patterns.
 - include:
     id:
-      # MISRA 6-2-2
-      - cpp/jsf/av-rule-202
+      - cpp/jpl-c/exit-nonterminating-loop 
+      - cpp/jpl-c/loop-bounds
