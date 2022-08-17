@@ -4,7 +4,4 @@
 # Restrict to only the queries with the following ID patterns.
 - include:
     id:
-      - cpp/jpl-c/preprocessor-use
-      - cpp/jpl-c/preprocessor-use-ifdef
-      - cpp/jpl-c/preprocessor-use-partial
-      - cpp/jpl-c/preprocessor-use-undisciplined
+      - cpp/jpl-c/macro-in-block
