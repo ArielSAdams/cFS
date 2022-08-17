@@ -1,7 +1,6 @@
 # Start with all the queries in the codeql/cpp-queries pack.
 - queries: .
   from: codeql/cpp-queries
-# Restrict to only the queries with the following ID patterns.
 - include:
     id:
       # MISRA 6-2-2
