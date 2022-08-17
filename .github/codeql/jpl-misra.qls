@@ -4,4 +4,4 @@
 # Restrict to only the queries with the following ID patterns.
 - include:
     id:
-      - cpp/jpl-c/use-of-undef
+      - cpp/jpl-c/mismatched-ifdefs
