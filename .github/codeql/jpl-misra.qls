@@ -4,4 +4,4 @@
 # Restrict to only the queries with the following ID patterns.
 - include:
     id:
-      - cpp/jpl-c/macro-in-block
+      - cpp/jpl-c/use-of-undef
