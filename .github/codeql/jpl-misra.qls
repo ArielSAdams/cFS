@@ -4,7 +4,5 @@
 # Restrict to only the queries with the following ID patterns.
 - include:
     id:
-      - cpp/jpl-c/avoid-nested-semaphores
-      - cpp/jpl-c/avoid-semaphores
-      - cpp/jpl-c/out-of-order-locks
-      - cpp/jpl-c/release-locks-when-acquired
+      - cpp/jpl-c/simple-control-flow-goto
+      - cpp/jpl-c/simple-control-flow-jmp
