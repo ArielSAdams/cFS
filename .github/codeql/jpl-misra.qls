@@ -4,4 +4,7 @@
 # Restrict to only the queries with the following ID patterns.
 - include:
     id:
-      - cpp/jpl-c/includes-first
+      - cpp/jpl-c/checking-return-values
+      - cpp/jpl-c/basic-int-types
+      - cpp/jpl-c/multiple-stmts-per-line
+      - cpp/jpl-c/multiple-var-decls-per-line
