@@ -4,5 +4,4 @@
 # Restrict to only the queries with the following ID patterns.
 - include:
     id:
-      - cpp/jpl-c/hidden-pointer-dereference-macro
-      - cpp/jpl-c/hidden-pointer-indirection-typedef
+      - cpp/jpl-c/non-const-function-pointer
