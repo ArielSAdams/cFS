@@ -112,7 +112,7 @@ jobs:
         uses: github/codeql-action/init@v1
         with:
           languages: c
-          config-file: ArielSAdams/cFS/.github/codeql/codeql-coding-standard.yml@JPL-7
+          config-file: ArielSAdams/cFS/.github/codeql/codeql-coding-standard.yml@JPL-9
 
       - name: Build
         run: ${{ inputs.make }}
