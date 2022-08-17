@@ -4,4 +4,4 @@ disable-default-queries: true
 
 queries:
   - name: JPL and MISRA
-    uses: ArielSAdams/cFS/.github/codeql/jpl-misra.qls@MISRA-5-14-1
+    uses: ArielSAdams/cFS/.github/codeql/jpl-misra.qls@MISRA-5-3-2
