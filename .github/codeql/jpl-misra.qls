@@ -4,4 +4,7 @@
 # Restrict to only the queries with the following ID patterns.
 - include:
     id:
-      - cpp/jpl-c/enum-initialization
+      - cpp/jpl-c/extern-decls-in-header
+      - cpp/jpl-c/limited-scope-file
+      - cpp/jpl-c/limited-scope-function
+      - cpp/jpl-c/limited-scope-local-hides-global
