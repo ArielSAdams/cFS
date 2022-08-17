@@ -4,5 +4,4 @@
 # Restrict to only the queries with the following ID patterns.
 - include:
     id:
-      - cpp/jpl-c/simple-control-flow-goto
-      - cpp/jpl-c/simple-control-flow-jmp
+      - cpp/jpl-c/enum-initialization
