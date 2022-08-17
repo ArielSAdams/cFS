@@ -4,7 +4,4 @@
 # Restrict to only the queries with the following ID patterns.
 - include:
     id:
-      - cpp/jpl-c/use-of-assertions-constant
-      - cpp/jpl-c/use-of-assertions-density
-      - cpp/jpl-c/use-of-assertions-non-boolean
-      - cpp/jpl-c/use-of-assertions-side-effect
+      - cpp/jpl-c/basic-int-types
