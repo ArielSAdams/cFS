@@ -71,8 +71,6 @@ jobs:
 
     strategy:
       fail-fast: false
-      matrix:
-        scan-type: [security, coding-standard]
 
     permissions:
       security-events: write
@@ -114,7 +112,7 @@ jobs:
         uses: github/codeql-action/init@v1
         with:
           languages: c
-          config-file: nasa/cFS/.github/codeql/codeql-${{matrix.scan-type}}.yml@main
+          config-file: ArielSAdams/cFS/.github/codeql/codeql-coding-standard.yml@6-2-2
 
       - name: Build
         run: ${{ inputs.make }}
@@ -124,10 +122,10 @@ jobs:
         uses: github/codeql-action/analyze@v1
         with:
           add-snippets: true
-          category: ${{matrix.scan-type}}
+          category: coding-standard
 
       - name: Archive Sarif
         uses: actions/upload-artifact@v2
         with:
-          name: CodeQL-Sarif-${{ matrix.scan-type }}
+          name: CodeQL-Sarif-coding-standard
           path: /home/runner/work/${{env.REPO}}/results/cpp.sarif
