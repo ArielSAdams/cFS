@@ -4,5 +4,4 @@
 # Restrict to only the queries with the following ID patterns.
 - include:
     id:
-      - cpp/jpl-c/exit-nonterminating-loop 
-      - cpp/jpl-c/loop-bounds
+      - cpp/jpl-c/recursion
