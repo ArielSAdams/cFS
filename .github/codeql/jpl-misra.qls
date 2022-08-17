@@ -4,4 +4,5 @@
 # Restrict to only the queries with the following ID patterns.
 - include:
     id:
-      - cpp/jpl-c/mismatched-ifdefs
+      - cpp/jpl-c/multiple-stmts-per-line
+      - cpp/jpl-c/multiple-var-decls-per-line
