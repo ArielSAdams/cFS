@@ -21,6 +21,8 @@
     id: 
       # JPL 14
       - cpp/jpl-c/checking-return-values
+      # JPL 15
+      - cpp/jpl-c/checking-parameter-values
       # JPL 17
       - cpp/jpl-c/basic-int-types
       # JPL 24

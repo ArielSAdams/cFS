@@ -112,7 +112,7 @@ jobs:
         uses: github/codeql-action/init@v1
         with:
           languages: c
-          config-file: ArielSAdams/cFS/.github/codeql/codeql-coding-standard.yml@New-CodeQL-Config
+          config-file: ArielSAdams/cFS/.github/codeql/codeql-coding-standard.yml@Remove-14-15-17-24
 
       - name: Build
         run: ${{ inputs.make }}
