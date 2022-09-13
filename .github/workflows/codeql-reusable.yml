@@ -142,9 +142,9 @@ jobs:
         uses: zbazztian/filter-sarif@master
         with:
         patterns: |
-            - '**/*.md'
-            - '**/*.txt'
-            - '**/*.dox'
+            -**/*.md
+            -**/*.txt
+            -**/*.dox
         input: CodeQL-Sarif-${{ matrix.scan-type }}
         output: CodeQL-Sarif-${{ matrix.scan-type }}
 
