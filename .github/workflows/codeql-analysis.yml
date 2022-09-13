@@ -6,7 +6,7 @@ on:
 
 jobs:
   codeql:
-    uses: nasa/ArielSAdams/.github/workflows/codeql-reusable.yml@test-paths-ignore
+    uses: ArielSAdams/cFS/.github/workflows/codeql-reusable.yml@test-paths-ignore
     with: 
       component-path: cFS
       make: make -j8

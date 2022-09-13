@@ -119,7 +119,7 @@ jobs:
         uses: github/codeql-action/init@v2
         with:
           languages: c
-          config-file: nasa/ArielSAdams/.github/codeql/codeql-${{matrix.scan-type}}.yml@test-paths-ignore
+          config-file: ArielSAdams/cFS/.github/codeql/codeql-${{matrix.scan-type}}.yml@test-paths-ignore
 
       - name: Build
         run: ${{ inputs.make }}
