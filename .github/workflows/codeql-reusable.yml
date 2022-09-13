@@ -145,8 +145,8 @@ jobs:
                 -**/*.md
                 -**/*.txt
                 -**/*.dox
-            input: CodeQL-Sarif-${{ matrix.scan-type }}
-            output: CodeQL-Sarif-${{ matrix.scan-type }}
+            input: CodeQL-Sarif-${{ matrix.scan-type }}/Codeql-${{ matrix.scan-type }}.sarif
+            output: CodeQL-Sarif-${{ matrix.scan-type }}/Codeql-${{ matrix.scan-type }}.sarif
 
       - name: Archive Sarif
         uses: actions/upload-artifact@v2
