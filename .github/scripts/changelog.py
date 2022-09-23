@@ -19,7 +19,6 @@ with open ('prs.json') as prs_file:
     prs = json.load(prs_file)
 
 PrData          = dict()    # {author: [pr1, pr2, pr3, ...]}
-AuthorPrChanges = dict()    # {author: #TotalChanges}
 
 # ignore all prs except ones with CCB:Approved
 for pr in prs:
@@ -31,30 +30,24 @@ for pr in prs:
     if ignore == False:
         if pr['author'] not in PrData:
             PrData[pr['author']] = [pr]
-            AuthorPrChanges[pr['author']] = pr['additions'] + pr['deletions']
         else:
             PrData[pr['author']].append(pr)
-            AuthorPrChanges[pr['author']] += pr['additions'] + pr['deletions']
 
 # no prs to write, exit program
 if len(PrData) == 0:
     print("Failed to find relevant Pull Requests for the changelog. Exiting...\n")
     sys.exit()
 
-# re-order dict according to sum(additions, deletions) of each pr for each author
-AuthorPrChanges = {k: v for k, v in sorted(AuthorPrChanges.items(), key=lambda item: item[1])}
-
-# write to markdown
-ccb_date = date.today().strftime('%Y.%m.%d')
-# prev_ccb_date = (date.today() - timedelta(days=7)).strftime('%Y.%m.%d')
-fileName = "CCB.md" #+ ccb_date +
+# Need to grab changelog from cFE
+# Need to open changelog 
 with open(fileName, 'w') as f:
-    f.write("## Items for Discussion\n\n")
-    for author in AuthorPrChanges.keys():
-        f.write("### @" + author + "\n\n")
-        for pr_auth in PrData[author]:
-            if (author == pr_auth['author']):
-                f.write("[" + pr_auth['number'] + "](" + pr_auth['url'].replace("pull", "issues") + ") " + pr_auth['title'] + "\n\n")
+    # Need to write the development build from latest commit containing "Bump to"
+    f.write("## Development Build:\n\n")
+    # Need to write title of all Prs in bulleted list
+    # Need to write Pr numbers on one bullet 
+    for pr_auth in PrData[author]:
+        if (author == pr_auth['author']):
+            f.write("[" + pr_auth['number'] + "](" + pr_auth['url'].replace("pull", "issues") + ") " + pr_auth['title'] + "\n\n")
 
 # close files
 f.close()
@@ -69,4 +62,4 @@ except OSError:
 time.sleep(5)
 
 if (os.stat(fileName).st_size != 0):
-    print("CCB markdown has been successfully created")
+    print("Changelog markdown has been successfully updated")
