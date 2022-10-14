@@ -57,7 +57,7 @@ jobs:
         uses: airtower-luna/convert-to-sarif@v0.2.0
         with:
           tool: 'CppCheck'
-          id: 'General-CppCheck'
+          id: 'sarif_file'
           input_file: 'general_cppcheck_err.xml'
           sarif_file: 'general_cppcheck_err.sarif'
           
@@ -83,7 +83,7 @@ jobs:
         if: ${{ inputs.strict-dir-list !='' }}
         with:
           tool: 'CppCheck'
-          id: 'Strict-CppCheck'
+          id: 'tool'
           input_file: 'strict_cppcheck_err.xml'
           sarif_file: 'strict_cppcheck_err.sarif'
 
