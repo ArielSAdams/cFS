@@ -70,6 +70,7 @@ jobs:
         with:
           sarif_file: 'general_cppcheck_err.sarif'
           checkout_path: ${{ env.CONTAINER_WORKSPACE }}
+          category: 'General-Cppcheck'
           
         # Run strict static analysis for embedded portions of cfe, osal, and psp
       - name: Strict cppcheck
@@ -83,7 +84,6 @@ jobs:
         if: ${{ inputs.strict-dir-list !='' }}
         with:
           tool: 'CppCheck'
-          category: 'tool'
           input_file: 'strict_cppcheck_err.xml'
           sarif_file: 'strict_cppcheck_err.sarif'
 
@@ -99,6 +99,7 @@ jobs:
         with:
           sarif_file: 'strict_cppcheck_err.sarif'
           checkout_path: ${{ env.CONTAINER_WORKSPACE }}
+          category: 'Strict-Cppcheck'
   
       - name: Check for general errors
         run: |
