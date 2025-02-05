@@ -1,0 +1,10 @@
+name: cFS bundle MCDC Analysis
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  mcdc:
+    name: Run MCDC Analysis
+    uses: ArielSAdams/cFS/.github/workflows/mcdc.yml@main
